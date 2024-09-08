@@ -1,7 +1,7 @@
 {
   "name": "mail-microservice",
   "description": "mail microservice",
-  "version": "0.1.1",
+  "version": "1.0.1",
   "author": "Dimitry Ivanov <2@ivanoff.org.ua> # curl -A cv ivanoff.org.ua",
   "license": "MIT",
   "main": "./dist/client.js",
