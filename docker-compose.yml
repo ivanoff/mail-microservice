@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  email-service:
+    build: .
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis_password
+      - RABBITMQ_URL=amqp://user:rabbitmq_password@rabbitmq
+    depends_on:
+      - redis
+      - rabbitmq
+
+  redis:
+    image: redis:alpine
+    restart: always
+    environment:
+      - REDIS_PASSWORD=redis_password
+    volumes:
+      - redis_data:/data
+    command: "redis-server --requirepass redis_password"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=rabbitmq_password
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  redis_data:
+  rabbitmq_data:

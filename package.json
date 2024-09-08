@@ -1,0 +1,36 @@
+{
+  "name": "mail-microservice",
+  "description": "mail microservice",
+  "version": "0.1.1",
+  "author": "Dimitry Ivanov <2@ivanoff.org.ua> # curl -A cv ivanoff.org.ua",
+  "license": "MIT",
+  "main": "./dist/client.js",
+  "types": "./dist/client.d.ts",
+  "scripts": {
+    "start": "bun src/server.ts",
+    "build": "bun build ./src/client.ts --outdir ./dist --target node --minify --external amqplib --external ioredis --external mustache --external nodemailer --external uuid --external the-log --external @types/bun && tsc"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "ioredis": "^5.4.1",
+    "mustache": "^4.2.0",
+    "nodemailer": "^6.9.14",
+    "uuid": "^10.0.0",
+    "the-log": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.6",
+    "@types/node": "^22.4.1"
+  },
+  "keywords": [
+    "email",
+    "microservice"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ivanoff/email-microservice.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ivanoff/email-microservice/issues"
+  }
+}
