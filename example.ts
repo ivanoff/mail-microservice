@@ -13,8 +13,8 @@ async function main() {
     from: 'noreply@battlepro.com',
     host: 'email-smtp.us-east-1.amazonaws.com',
     port: 587,
-    user: 'AKIARIX7TQGSF4FJZLGS',
-    password: 'BKPm+q/QEZYo2y/jkyxB++QeQZ7qXGiqgQmHpxxn34ww',
+    user: 'ERUX...WF',
+    password: 'BdPp...eD',
     secure: false,
     tls: false,
   });
