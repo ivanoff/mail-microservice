@@ -7,15 +7,21 @@ class RabbitMQService {
   queues: { request: string; response: string; };
 
   async connect(): Promise<void> {
+    while (!this.connection) {
+      try {
+        this.connection = await amqp.connect(config.rabbitMQ.url);
+        this.channel = await this.connection.createChannel();
+        this.queues = config.rabbitMQ.queues;
 
-    this.connection = await amqp.connect(config.rabbitMQ.url);
-    this.channel = await this.connection.createChannel();
-    this.queues = config.rabbitMQ.queues;
+        await this.channel.assertQueue(this.queues.request);
+        await this.channel.assertQueue(this.queues.response);
 
-    await this.channel.assertQueue(this.queues.request);
-    await this.channel.assertQueue(this.queues.response);
-
-    await this.channel.prefetch(1);
+        await this.channel.prefetch(1);
+      } catch (error) {
+        console.error('Failed to connect to RabbitMQ. Retrying in 5 seconds...', error.message);
+        await Bun.sleep(5000);
+      }
+    }
   }
 
   async consumeRequestQueue(callback: (msg: amqp.ConsumeMessage | null) => void): Promise<void> {

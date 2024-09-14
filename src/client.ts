@@ -10,7 +10,7 @@ class EmailServiceClient {
     request: string;
     response: string;
   };
-  private callbacks: Map<string, (error: Error | null, result: any) => void> = new Map();
+  private callbacks: Record<string, (error: Error | null, result?: any) => void> = {};
 
   constructor(
     url: string,
@@ -33,9 +33,11 @@ class EmailServiceClient {
         if (msg) {
           const content = JSON.parse(msg.content.toString());
 
-          const callback = this.callbacks.get(content.correlationId);
-          if (callback) callback(null, content.result);
-          this.callbacks.delete(content.correlationId);
+          const callback = this.callbacks[`${content.correlationId}`];
+          if (callback) {
+            callback(content.result.send.error, content.result);
+            delete this.callbacks[`${content.correlationId}`];
+          }
 
           this.channel?.ack(msg);
         }
@@ -87,10 +89,23 @@ class EmailServiceClient {
       },
     };
 
-    if (callback) this.callbacks.set(correlationId, callback);
+    if (callback) this.callbacks[`${correlationId}`] = callback;
 
     await this.channel.assertQueue(this.queues.request);
     this.channel.sendToQueue(this.queues.request, Buffer.from(JSON.stringify(message)));
+
+    // ((cId) => setTimeout(() => {
+    //   if (!this.callbacks[`${cId}`]) return;
+    //   this.callbacks[`${cId}`](new Error('Timeout'));
+    //   delete this.callbacks[`${cId}`];
+    // }, 60 * 1000))(correlationId);
+  }
+
+  async sendEmailAndWaitForResult(options: SendType): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      options.callback = (error, result) => error ? reject(error) : resolve(result);
+      await this.sendEmail(options);
+    })
   }
 
   async close(): Promise<void> {

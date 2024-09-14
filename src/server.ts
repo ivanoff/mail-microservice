@@ -1,7 +1,5 @@
 import { rabbitmqService, RedisService, emailService } from './services';
-import { RequestType, ResultType, SendType } from './types';
-
-await Bun.sleep(10000);
+import { RequestType, ResultType } from './types';
 
 const redisService = new RedisService();
 
@@ -46,7 +44,7 @@ async function main() {
       if (smtpConfig) {
         result.send = await emailService.sendEmail(send, smtpConfig, tpl);
       } else {
-        result.send = { error: `SMTP config ${send.smtpName || 'default'} not found`};
+        result.send = { error: `SMTP config ${send.smtpName || 'default'} not found` };
       }
     }
 

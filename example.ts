@@ -26,7 +26,14 @@ async function main() {
     html: '<b>Welcome, {{name}}!</b><br />This is a test message.',
   });
 
-  // Send e-mail
+  // Send e-mail without callback
+  await client.sendEmail({
+    email: '2@ivanoff.org.ua',
+    templateName: 'welcome',
+    data: { name: 'John Doe' },
+  });
+
+  // Send e-mail with callback
   await client.sendEmail({
     email: '2@ivanoff.org.ua',
     templateName: 'welcome',
@@ -39,6 +46,18 @@ async function main() {
       }
     }
   });
+
+  // Send e-mail and wait for result
+  try {
+    const result = await client.sendEmailAndWaitForResult({
+      email: '2@ivanoff.org.ua',
+      templateName: 'welcome',
+      data: { name: 'John Doe' },
+    });
+    console.log('Email sent successfully:', result);
+  } catch(error) {
+    console.error('Error sending email:', error);
+  }
 
   await client.close();
 }
