@@ -25,7 +25,7 @@ This document provides instructions for setting up and using the **mail microser
 
 ## Usage example
 
-Before running this example, make sure to [set up the email-microservice server](#server-setup).
+Before running this example, make sure to [set up the mail-microservice server](#server-setup).
 
 ```javascript
 import EmailServiceClient from 'mail-microservice';
