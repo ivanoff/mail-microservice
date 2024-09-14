@@ -1,6 +1,8 @@
-# Mail Microservice Documentation
+![mail-microservice](./assets/logo.webp)
 
-- [Mail Microservice Documentation](#mail-microservice-documentation)
+# Mail Microservice
+
+- [Mail Microservice](#mail-microservice)
   - [Introduction](#introduction)
   - [Usage example](#usage-example)
   - [Setup](#setup)
@@ -12,7 +14,10 @@
     - [Managing Email Templates](#managing-email-templates)
     - [Sending Emails](#sending-emails)
     - [Closing the Connection](#closing-the-connection)
-  - [Conclusion](#conclusion)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Support](#support)
+  - [Created by](#created-by)
 
 ## Introduction
 
