@@ -10,7 +10,7 @@ async function main() {
 
   // Add SMTP-configuration
   await client.addSMTPConfig('default', {
-    from: 'noreply@battlepro.com',
+    from: 'noreply@example.com',
     host: 'email-smtp.us-east-1.amazonaws.com',
     port: 587,
     user: 'ERUX...WF',
