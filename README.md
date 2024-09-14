@@ -90,6 +90,8 @@ email-service-1  | Connected
 
 ### Client Setup
 
+This microservice provides a flexible way to manage email configurations, templates, and sending. It integrates with RabbitMQ for message queuing and uses Mustache for templating. Remember to handle errors appropriately and close the connection when finished.
+
 To use the mail-microservice in your project:
 
 1. Install the npm module:
@@ -201,6 +203,21 @@ When you're done using the client, close the connection:
 await client.close();
 ```
 
-## Conclusion
+## License
 
-This microservice provides a flexible way to manage email configurations, templates, and sending. It integrates with RabbitMQ for message queuing and uses Mustache for templating. Remember to handle errors appropriately and close the connection when finished.
+This project is distributed under the `MIT` license. See the [LICENSE](./LICENSE) file for more information.
+
+Please note that `ClamAV` is licensed under the Apache 2.0 license. More details can be found [here](https://github.com/bcgov/clamav/blob/master/LICENSE)
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## Support
+
+If you encounter any problems or have questions, please open an issue in the project repository.
+
+## Created by
+
+Dimitry Ivanov <2@ivanoff.org.ua> # curl -A cv ivanoff.org.ua
+
