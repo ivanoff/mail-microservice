@@ -1,4 +1,4 @@
-![mail-microservice](./assets/logo.webp)
+![mail-microservice](./logo.webp)
 
 # Mail Microservice
 
